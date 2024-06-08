@@ -1,0 +1,30 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  #myChart {
+    width: 500px;
+    height: 500px;
+  }
+</style>
+<div class="dash-item">
+  <h4 style="padding:.5em;">Belbin Test Results</h4>
+    <canvas id="myChart"></canvas>
+    <script>
+      let belbinResults = JSON.parse('<%= latestBelbinResult.belbinResults %>');
+      let total = 70;
+      let data = belbinResults;
+      let vtx = document.getElementById('myChart').getContext('2d');
+      new Chart(vtx, {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: data,
+            backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#c45850', '#8e5ea2', '#3cba9f', '#e8c3b9', '#c45850', '#8e5ea2']
+          }],
+          labels: ['Л - Координатор', 'Л - Воплотитель идей', 'Л - Активизатор', 'КвК - Гармонизатор отношений', 'T -Генератор идей', 'T - Изыскатель ресурсов', 'K - Гарант качества', 'K - Оценивающий контролер', 'K - Специалист']
+        },
+        options: {
+          responsive: false
+        }
+      });
+    </script>
+</div>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <title>Test</title>
+  </head>
+  <body>
+    <% include ../partials/nav %>
+    <div class="main">
+    <div class="board user-form">
+        <h1>Login</h1>
+        <form action="/loginRecruiters" method="post" id="loginform">
+          <input type="email" name="email" placeholder="Email">
+          <input type="password" name="password" placeholder="Password">
+          <input class="btn" type="submit">
+        </form>
+      </div>
+    </div>
+    <% include ../partials/bs %>
+  </body>
+</html>
+

@@ -1,0 +1,40 @@
+<div class="dash-item">
+    <h4 style="padding:.5em;"><%=recruiter[0].name%>'s Tests</h4>
+    <table class="table">
+        <a href="/dashboard/create/<%=recruiter[0].id%>"><button type="button" class="btn purple-btn">Create Test</button></a>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col"># of Questions</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Test Code</th>
+          </tr>
+        </thead>
+        <tbody>
+         <% for(let i =0; i < test.length; i++){%>
+          <tr>
+            <th scope="row"><%=test[i].name%></th>
+            <td><%=test[i].total%></td>
+            <td><%=test[i].created_at.toLocaleDateString()%></td>
+            <td><%=test[i].code%></td>
+            
+        
+          </tr>
+        <% } %>
+        </tbody>
+      </table>
+             <%if (result.length == 0) { %>
+      <p>You don't have any Tests!</p>
+        <% } %>
+  </div>
+
+  <script>
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).attr('href')).select();
+        console.log($(element).text())
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script>

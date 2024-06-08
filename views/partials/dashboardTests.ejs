@@ -1,0 +1,290 @@
+<div class="dash-item">
+    <h4> <strong><%= testItem[0].name %></strong></h4>
+    <div class="row">
+        <div class="col-4">
+            <h5>Number of Questions:</h5>
+            <div class="total-number">
+                <%=testItem[0].total %>
+            </div>
+        </div>
+        <div class="col-4 code-containter">
+            <h5>Test Code:</h5>
+            <div id=clone class="code-container">
+                <p id="p1">
+                    <%=testItem[0].code %>
+                </p>
+            </div>
+            <a class="clone-btn" onclick="copyToClipboard('#p1')"><i class="far fa-clone"></i></a>
+        </div>
+
+
+
+        <div class="col-4 time-updated-created-container">
+            <h5>Created:</h5>
+            <p><strong>Time: <%=testItem[0].created_at.getHours()%>:<%=testItem[0].created_at.getMinutes()%></strong></p>
+            <p><strong> Date: <%=testItem[0].created_at.getDate()%>/<%= (testItem[0].created_at.getMonth()+1)%>/<%= testItem[0].created_at.getFullYear()%>
+          </strong></p>
+        </div>
+    </div>
+
+
+    <div class="questions-div">
+        <h5>Test Questions:</h5>
+
+        <%if (questions.length == 0) { %>
+            You don't have any questions!
+            <% } %>
+                <div class="accordion" id="accordionExample">
+
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseQ" aria-expanded="true" aria-controls="collapseOne">
+                                    Add a New Question
+                                </button>
+                            </h2>
+                        </div>
+                    
+                        <div id="collapseQ" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                    
+                                <% if (testItem[0].belbinSwitch === "on") { %>
+                                    <form method='post' action='/<%=recruiter[0].id%>/addBelbin/<%=testItem[0].id%>' enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="belbin">Question</label>
+                                            <input type="text" class="form-control" id="questionBelbin" name="questionBelbin" placeholder="Enter Question">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option A</label>
+                                            <input type="text" class="form-control" id="optionA" name="optionA" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option B</label>
+                                            <input type="text" class="form-control" id="optionB" name="optionB" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option C</label>
+                                            <input type="text" class="form-control" id="optionC" name="optionC" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option D</label>
+                                            <input type="text" class="form-control" id="optionD" name="optionD" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option E</label>
+                                            <input type="text" class="form-control" id="optionE" name="optionE" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option F</label>
+                                            <input type="text" class="form-control" id="optionF" name="optionF" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option G</label>
+                                            <input type="text" class="form-control" id="optionG" name="optionG" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option H</label>
+                                            <input type="text" class="form-control" id="optionH" name="optionH" placeholder="Enter Text">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="belbin">Option I</label>
+                                            <input type="text" class="form-control" id="optionI" name="optionI" placeholder="Enter Text">
+                                        </div>
+                                        <input class="btn btn-success btn-submit-question" type="submit" value="Submit">
+                                    </form>
+                                <% } else { %>
+                                    <form method='post' action='/<%=recruiter[0].id%>/add/<%=testItem[0].id%>' enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <label for="question">Question</label>
+                                            <textarea class="form-control" id="question" name="question"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="file" class="form-control-file" id="question_image" name="question_image">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="correct">Correct</label>
+                                            <input type="text" class="form-control" id="correct" name="correct" placeholder="Enter Correct Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_one">Incorrect #1</label>
+                                            <input type="text" class="form-control" id="false_question_one" name="false_question_one" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_two">Incorrect #2</label>
+                                            <input type="text" class="form-control" id="false_question_two" name="false_question_two" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_three">Incorrect #3</label>
+                                            <input type="text" class="form-control" id="false_question_three" name="false_question_three" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_four">Incorrect #4</label>
+                                            <input type="text" class="form-control" id="false_question_four" name="false_question_four" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_five">Incorrect #5</label>
+                                            <input type="text" class="form-control" id="false_question_five" name="false_question_five" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_six">Incorrect #6</label>
+                                            <input type="text" class="form-control" id="false_question_six" name="false_question_six" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="false_question_seven">Incorrect #7</label>
+                                            <input type="text" class="form-control" id="false_question_seven" name="false_question_seven" placeholder="Enter Incorrect Answer">
+                                        </div>
+                                        <input class="btn btn-success btn-submit-question" type="submit" value="Submit">
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    <% if (testItem[0].belbinSwitch === "on") { %>
+                        <% for (let i = 0; i < questionsBelbin.length; i++) { %>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%=questionsBelbin[i].id %>" aria-expanded="true" aria-controls="collapseOne">
+                                            <%=questionsBelbin[i].questionBelbin %>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapse<%=questionsBelbin[i].id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <form action='/dashboard/<%=recruiter[0].id%>/deleteBelbin/<%=testItem[0].id%>/<%=questionsBelbin[i].id%>' method='post'>
+                                            <div class="form-group">
+                                                <label for="questionBelbin">Question</label>
+                                                <input type="text" class="form-control" id="questionBelbin" name="questionBelbin" placeholder="Enter Question" value="<%=questionsBelbin[i].questionBelbin %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionA">Option A</label>
+                                                <input type="text" class="form-control" id="optionA" name="optionA" placeholder="Enter Text" value="<%=questionsBelbin[i].optionA %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionB">Option B</label>
+                                                <input type="text" class="form-control" id="optionB" name="optionB" placeholder="Enter Text" value="<%=questionsBelbin[i].optionB %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionC">Option C</label>
+                                                <input type="text" class="form-control" id="optionC" name="optionC" placeholder="Enter Text" value="<%=questionsBelbin[i].optionC %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionD">Option D</label>
+                                                <input type="text" class="form-control" id="optionD" name="optionD" placeholder="Enter Text" value="<%=questionsBelbin[i].optionD %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionE">Option E</label>
+                                                <input type="text" class="form-control" id="optionE" name="optionE" placeholder="Enter Text" value="<%=questionsBelbin[i].optionE %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionF">Option F</label>
+                                                <input type="text" class="form-control" id="optionF" name="optionF" placeholder="Enter Text" value="<%=questionsBelbin[i].optionF %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionG">Option G</label>
+                                                <input type="text" class="form-control" id="optionG" name="optionG" placeholder="Enter Text" value="<%=questionsBelbin[i].optionG %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionH">Option H</label>
+                                                <input type="text" class="form-control" id="optionH" name="optionH" placeholder="Enter Text" value="<%=questionsBelbin[i].optionH %>" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="optionI">Option I</label>
+                                                <input type="text" class="form-control" id="optionI" name="optionI" placeholder="Enter Text" value="<%=questionsBelbin[i].optionI %>" required>
+                                            </div>
+                                            <input class="btn btn-success btn-submit-question" type="submit" value="Submit">
+                                        </form>
+                                        <div class="btn-question-edit-delete">
+                                            <a href='/dashboard/<%=recruiter[0].id%>/deleteBelbin/<%=testItem[0].id%>/<%=questionsBelbin[i].id%>'><button class="btn btn-danger">Delete</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <% for (let i = 0; i < questions.length; i++) { %>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%=questions[i].id %>" aria-expanded="true" aria-controls="collapseOne">
+                                            <%=questions[i].question %>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapse<%=questions[i].id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                      <form method='post' action='/dashboard/<%=recruiter[0].id%>/delete/<%=testItem[0].id%>/<%=questions[i].id%>'>
+                                          <div class="form-group">
+                                              <label for="question">Question</label>
+                                              <textarea type="text" class="form-control" id="question" name="question" required><%=questions[i].question %></textarea>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="image">Image</label>
+                                            <input type="file" class="form-control-file" id="question_image" name="question_image" value="<%=questions[i].question_image %>" required>
+                                        </div>
+                                          <div class="form-group">
+                                              <label for="correct">Correct</label>
+                                              <input type="text" class="form-control" id="correct" name="correct" value="<%=questions[i].correct %>">
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="false_question_one">Incorrect #1</label>
+                                              <input type="text" class="form-control" id="false_question_one" name="false_question_one" value='<%=questions[i].false_question_one %>'>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="false_question_two">Incorrect #2</label>
+                                              <input type="text" class="form-control" id="false_question_two" name="false_question_two" value='<%=questions[i].false_question_two %>'>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="false_question_three">Incorrect #3</label>
+                                            <input type="text" class="form-control" id="false_question_three" name="false_question_three" value='<%= questions[i].false_question_three %>'>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="false_question_four">Incorrect #4</label>
+                                            <input type="text" class="form-control" id="false_question_four" name="false_question_four" value='<%= questions[i].false_question_four %>'>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="false_question_five">Incorrect #5</label>
+                                            <input type="text" class="form-control" id="false_question_five" name="false_question_five" value='<%= questions[i].false_question_five %>'>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="false_question_six">Incorrect #6</label>
+                                            <input type="text" class="form-control" id="false_question_six" name="false_question_six" value='<%= questions[i].false_question_six %>'>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="false_question_seven">Incorrect #7</label>
+                                            <input type="text" class="form-control" id="false_question_seven" name="false_question_seven" value='<%= questions[i].false_question_seven %>'>
+                                        </div>
+                                          <input value='Edit' class="btn btn-success btn-submit-question" type="submit" class="btn btn-primary">
+                                      </form>
+                                        <div class="btn-question-edit-delete">
+                                            <a href='/dashboard/<%=recruiter[0].id%>/delete/<%=testItem[0].id%>/<%=questions[i].id%>'><button class="btn btn-danger">Delete</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
+                    
+                </div>
+    </div>
+    <div class="btn-delete-container">
+        <a href="/dashboard/delete/<%=recruiter[0].id%>/<%=testItem[0].id%>"><button class="btn btn-danger">DELETE TEST</button></a>
+    </div>
+</div>
+<script>
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+</script>

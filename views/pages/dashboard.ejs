@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <title>Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+  </head>
+  
+  <body>
+    <% include ../partials/navDashboard %>
+    
+    <div class="dash-main">
+      <% include ../partials/sidebar%>
+        <div class="dash-container app">
+          <% include ../partials/tests %>
+          <% include ../partials/dashboardUsers %>
+        </div>
+    </div>
+    <% include ../partials/bs %>
+  </body>
+  <script>
+      var dropdown = document.getElementsByClassName("dropdown-btn");
+      var i;
+      
+      for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+        } else {
+        dropdownContent.style.display = "block";
+        }
+        });
+      }
+      </script>
+</html>
+

@@ -1,0 +1,111 @@
+.nav-item-right {
+    padding: 0 15px 0 0;
+}
+
+.navbar a {
+    color: black;
+}
+
+.logo {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.8em;
+    color: #42548E;
+    text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.logo-link:hover {
+    text-decoration: none;
+}
+
+.dropdown-menu {
+    left: -90px;
+}
+
+.landing-jumbotron {
+    background-color: #4E3B77;
+    color: white;
+    text-align: center;
+    padding-bottom: 10%;
+    padding-top: 5%;
+    margin-bottom: 0;
+}
+
+.landing-jumbotron .btn-primary {
+    background-color: #FAA275;
+    border: #FAA275;
+}
+
+.sell {
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    color: #555555;
+}
+
+.sells {
+    background-color: Gainsboro;
+}
+
+.sell form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    align-items: center;
+}
+
+.formcont {
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    border-left: solid gray;
+}
+
+.sell .btn-primary {
+    background-color: #4E3B77;
+    border: #4E3B77;
+    margin-top: 10px;
+}
+
+.background-triangle {
+    height: 0;
+    border-left: 49vw solid transparent;
+    border-right: 49vw solid transparent;
+    border-top: 100px solid Gainsboro;
+}
+
+.icons {
+    text-align: center;
+    color: #555555;
+}
+
+.icons img {
+    width: 10vw;
+}
+
+.icons .col {
+    margin: 10px;
+}
+
+.testtwo img {
+    width: 15vw;
+    margin-bottom: 10px;
+}
+
+.testtwo .bot {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    color: #555555;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.call {
+    border-bottom: solid #555555;
+}

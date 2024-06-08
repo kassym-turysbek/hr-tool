@@ -1,0 +1,14 @@
+form {
+width: 50%;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary {
+  background-color: #252E4F !important;
+  border-color: #252E4F !important;
+}

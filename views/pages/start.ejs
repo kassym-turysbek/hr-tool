@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <style>
+    h3 {
+      color: black;
+    }
+    label {
+      color: black;
+    }
+    #time {
+      font-size: 30px;
+    }
+  </style>
+  <title>Test</title>
+</head>
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+  <div class='main'>
+    <div class='user-form'>
+      <h3><%= question[0].question %></h3>
+      <% if (question[0].question_image) { %>
+        <img src="/<%= question[0].question_image %>" alt="Question Image">
+      <% } %>
+      <form id='submit' method="post" action="/taketest/next/<%= test %>/<%= user[0].id %>/<%= question[0].id %>">
+        <div class="row">
+          <div class="col-md-6">
+            <% for (let i = 0; i < Math.ceil((newArr.length + 1) / 2); i++) { %>
+              <% if (newArr[i] && question[0][newArr[i][0]]) { %>
+                <div class="form-group form-check">
+                  <input type="radio" name='response' class="form-check-input" value=<%= newArr[i][1] %> id="Check<%= i + 1 %>">
+                  <label class="form-check-label" for="Check<%= i + 1 %>"><%= question[0][newArr[i][0]] %></label>
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+          <div class="col-md-6">
+            <% for (let i = Math.ceil((newArr.length + 1) / 2); i < newArr.length; i++) { %>
+              <% if (newArr[i] && question[0][newArr[i][0]]) { %>
+                <div class="form-group form-check">
+                  <input type="radio" name='response' class="form-check-input" value=<%= newArr[i][1] %> id="Check<%= i + 1 %>">
+                  <label class="form-check-label" for="Check<%= i + 1 %>"><%= question[0][newArr[i][0]] %></label>
+                </div>
+              <% } %>
+            <% } %>
+          </div>
+        </div>
+        
+        <input class='btn' type="submit" value="Submit">
+      </form>
+      <!-- Hidden form for timer completion -->
+<form id="timeUpForm" method="post" action="/taketest/timeisup/<%= test %>/<%= user[0].id %>/<%= question[0].id %>" style="display:none;">
+  <input type="hidden" name="response" id="hiddenResponse">
+</form>
+</div>
+<div id="time">Time: <%= String(Math.floor(timeLimit / 60)).padStart(2, '0') %>:<%= String(timeLimit % 60).padStart(2, '0') %></div>
+</div>
+
+<script>
+  const testId = <%= test %>; // testId when rendering the page
+  const userId = <%= user[0].id %>; // userId when rendering the page
+  const totalDuration = <%= timeLimit %> * 60; // timeLimit in seconds
+  const timerDisplay = document.getElementById('time');
+  const storageKey = `endTime-${testId}-${userId}`;
+  let endTime = sessionStorage.getItem(storageKey);
+
+  if (!endTime) {
+    endTime = Date.now() + totalDuration * 1000;
+    sessionStorage.setItem(storageKey, endTime);
+  }
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  }
+
+  function updateTime() {
+    const now = Date.now();
+    const timeLeft = Math.round((endTime - now) / 1000);
+
+    if (timeLeft <= 0) {
+      timerDisplay.textContent = 'Time: 00:00';
+      clearInterval(timerInterval);
+      completeTest();
+    } else {
+      timerDisplay.textContent = 'Time: ' + formatTime(timeLeft);
+    }
+  }
+
+  const timerInterval = setInterval(updateTime, 1000);
+  updateTime();
+
+  function noBack() {
+    window.history.forward();
+  }
+
+  function completeTest() {
+    sessionStorage.removeItem(storageKey);
+
+    // Get the selected response
+    const selectedResponse = document.querySelector('input[name="response"]:checked');
+    if (selectedResponse) {
+      document.getElementById('hiddenResponse').value = selectedResponse.value;
+    }
+
+    document.getElementById('timeUpForm').submit();
+  }
+</script>
+
+</body>
+</html>

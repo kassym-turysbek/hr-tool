@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="/stylesheets/styles.css">
+  <style>
+    .row {
+      width: 1000px;
+    }
+    h3 {
+      color: black;
+    }
+    label {
+      color: black;
+    }
+    #time {
+      font-size: 30px;
+    }
+  </style>
+  <title>Test</title>
+</head>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+  <div class='main'>
+    <div class='user-form'>
+      <h3><%= question[0].questionBelbin %></h3>
+      <form id='submit' method="post" action="/taketest/nextBelbin/<%= test %>/<%= user[0].id %>/<%= question[0].id %>">
+        <div class="form-group">
+          <% for (let i = 0; i < 9; i++) { %>
+          <div class="row">
+            <div class="col-sm-9">
+              <label><%= question[0][options[i][0]] %></label>
+            </div>
+            <div class="col-sm-3">
+              <input type="number" min="0" max="10" class="form-control input-option" name="option<%= String.fromCharCode(65 + i) %>" placeholder="Points" oninput="validateSum()">
+            </div>
+          </div>
+          <% } %>
+        </div>
+        <p id="sumError" style="color: red; display: none;">The sum must be exactly 10</p>
+        <input class='btn' type="submit" value="Submit" id="submitBtn" disabled>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript">
+    function validateSum() {
+      var inputs = document.querySelectorAll('.input-option');
+      var sumError = document.getElementById('sumError');
+      var submitBtn = document.getElementById('submitBtn');
+      var sum = 0;
+
+      inputs.forEach(function(input) {
+        sum += Number(input.value) || 0;
+      });
+
+      if (sum === 10) {
+        sumError.style.display = 'none';
+        submitBtn.disabled = false;
+      } else {
+        sumError.style.display = 'block';
+        submitBtn.disabled = true;
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', (event) => {
+      validateSum(); // Initial validation on page load
+    });
+  </script>
+</body>
+</html>
