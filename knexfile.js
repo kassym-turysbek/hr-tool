@@ -2,10 +2,10 @@ module.exports = {
     development: {
         client: 'pg',
         connection: {
-            database: "skilltest",
-            host: "localhost",
-            user: "postgres",
-            password: "12345"
+            database: "hr_tool_db",
+            host: "dpg-cpis6pq1hbls73bm7dl0-a",
+            user: "hr_tool_db_user",
+            password: "IekMEYqzqciFT72K2nEyCFiUr5YZKJ7M"
         },
         migrations: {
             directory: __dirname + '/db/migrations',
