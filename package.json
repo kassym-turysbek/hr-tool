@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "migrate": "knex migrate:latest",
+    "postdeploy": "npm run migrate && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
